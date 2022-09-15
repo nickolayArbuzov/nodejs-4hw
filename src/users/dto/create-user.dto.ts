@@ -12,6 +12,6 @@ export class CreateUserDto {
     readonly password: string;
     
     @IsString()
-    @Matches(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$)/)
+    @Matches(/^([\w-\.]+@([\w-]+\.)+[\w-]{2,4}$)/)
     readonly email: string;
 }

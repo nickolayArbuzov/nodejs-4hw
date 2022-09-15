@@ -2,7 +2,7 @@ import {Body, Controller, Delete, Get, HttpCode, Param, ParseIntPipe, ParseUUIDP
 import {PostService} from "./post.service";
 import { CreatePostDto, UpdatePostDto } from './dto/post.dto';
 import { AuthGuard } from '../guards/auth.guard';
-import { QueryDto } from '../commonDTO/query.dto';
+import { QueryBlogDto } from '../commonDTO/query.dto';
 
 
 @Controller('posts')
@@ -10,7 +10,7 @@ export class PostController {
 
     constructor(private postService: PostService) {}
     @Get()
-    getAll(@Query() query: QueryDto) {
+    getAll(@Query() query: QueryBlogDto) {
         return this.postService.findAll(query);
     }
 

@@ -4,7 +4,7 @@ import { PostService } from '../posts/post.service';
 import { AuthGuard } from '../guards/auth.guard';
 import {BloggerService} from "./blogger.service";
 import { CreateBloggerDto, UpdateBloggerDto } from './dto/blogger.dto';
-import { QueryDto } from '../commonDTO/query.dto';
+import { QueryBlogDto } from '../commonDTO/query.dto';
 
 
 @Controller('blogs')
@@ -15,7 +15,7 @@ export class BloggerController {
         private postService: PostService,
     ) {}
     @Get()
-    getAll(@Query() query: QueryDto) {
+    getAll(@Query() query: QueryBlogDto) {
         return this.bloggerService.findAll(query);
     }
 
@@ -25,7 +25,7 @@ export class BloggerController {
     }
 
     @Get(':id/posts') 
-    getPostByBlogId(@Param('id') id: string, @Query() query: QueryDto) { 
+    getPostByBlogId(@Param('id') id: string, @Query() query: QueryBlogDto) { 
         return this.bloggerService.findAllPostsByBlogId(id, query)
     }
 

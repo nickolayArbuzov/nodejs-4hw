@@ -1,9 +1,8 @@
-import { QueryDto } from "src/commonDTO/query.dto";
+import { QueryBlogDto } from "src/commonDTO/query.dto";
 
-export const queryDefault: QueryDto = {
+export const queryDefault: QueryBlogDto = {
     pageNumber: '1',
     pageSize: '10', 
     sortBy: 'createdAt', 
-    searchNameTerm: '', 
     sortDirection: 'desc',
 }

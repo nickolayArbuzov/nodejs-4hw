@@ -4,7 +4,7 @@ import { PostService } from '../posts/post.service';
 import { Repository } from 'typeorm';
 import { Blogger } from './blogger.entity';
 import { CreateBloggerDto, UpdateBloggerDto } from './dto/blogger.dto';
-import { QueryDto } from '../commonDTO/query.dto';
+import { QueryBlogDto } from '../commonDTO/query.dto';
 import { queryDefault } from '../constants/constants';
 
 
@@ -17,7 +17,7 @@ export class BloggerService {
     private readonly postRepository: Repository<Post>,
   ) {}
 
-  async findAllPostsByBlogId(id: string, query: QueryDto) {
+  async findAllPostsByBlogId(id: string, query: QueryBlogDto) {
 
     const blog = await this.bloggerRepository.findOne({where: {id: id}})
 
@@ -51,7 +51,7 @@ export class BloggerService {
     }
   }
 
-  async findAll(query: QueryDto) {
+  async findAll(query: QueryBlogDto) {
     const repo = this.bloggerRepository.createQueryBuilder('blog')
     if(query.searchNameTerm) {
       //repo.where("LOWER(blog.name) like :name", { name: `LOWER(%${query.searchNameTerm}%)` })
@@ -75,6 +75,7 @@ export class BloggerService {
       page: query.pageNumber ? +query.pageNumber : +queryDefault.pageNumber, 
       pageSize: query.pageSize ? +query.pageSize : +queryDefault.pageSize, 
       totalCount: count, 
+      // скорее всего связано с различной сортировкой в js и postgresql
       items: query.sortBy === 'name' ? returnedBlogs.sort((a,b) => a.name > b.name && sortDirection === 'ASC' ? 1 : -1 ) : returnedBlogs
     }
   }

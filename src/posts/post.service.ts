@@ -4,7 +4,7 @@ import { Repository } from 'typeorm';
 import { CreatePostDto, UpdatePostDto } from './dto/post.dto';
 import { Post } from './post.entity';
 import { BloggerService } from '../blogger/blogger.service';
-import { QueryDto } from '../commonDTO/query.dto';
+import { QueryBlogDto } from '../commonDTO/query.dto';
 import { queryDefault } from '../constants/constants';
 
 @Injectable()
@@ -15,7 +15,7 @@ export class PostService {
     private readonly bloggerService: BloggerService,
   ) {}
 
-  async findAll(query: QueryDto) {
+  async findAll(query: QueryBlogDto) {
 
     const repo = this.postRepository.createQueryBuilder('post')
 
@@ -42,7 +42,7 @@ export class PostService {
     }
   }
 
-  async findAllPostsByBlogId(id: string, query: QueryDto) {
+  async findAllPostsByBlogId(id: string, query: QueryBlogDto) {
 
 
     const repo = this.postRepository.createQueryBuilder('post')

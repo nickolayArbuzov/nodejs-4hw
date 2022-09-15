@@ -14,7 +14,7 @@ import { Meeting } from './test/meeting.entity';
 import { Task } from './test/task.entity';
 import { AllDataModule } from './all-data/all-data.module';
 import { LoggerMiddleware } from './middleware/auth.middleware';
-import { ValidateModule } from './validate/validate.module';
+import { AuthModule } from './auth/auth.module';
 
 
 @Module({
@@ -32,6 +32,7 @@ import { ValidateModule } from './validate/validate.module';
     UserModule,
     VideoModule,
     AllDataModule,
+    AuthModule,
   ],
 })
 export class AppModule {}

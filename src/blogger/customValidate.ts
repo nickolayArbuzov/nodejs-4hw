@@ -1,6 +1,4 @@
-import { Global, Inject, Injectable } from '@nestjs/common';
-import { Blogger } from './blogger.entity';
-import { Repository } from 'typeorm';
+import { Injectable } from '@nestjs/common';
 import { registerDecorator, ValidationArguments, ValidationOptions, ValidatorConstraint, ValidatorConstraintInterface } from "class-validator";
 import { BloggerService } from './blogger.service';
 
@@ -20,13 +18,12 @@ export function BlogIsExist(validationOptions?: ValidationOptions) {
 export class BlogIsExistRule implements ValidatorConstraintInterface {
   constructor(private blogService: BloggerService) {}
 
-  async validate(value: string, context: any) {
+  async validate(value: string) {
     try {
       const blog = await this.blogService.findOneForCustomDecorator(value)
       if(blog) {
         return true
       } else return false
-      //const blog = await this.blogRepository.find({where: {id: value}});
     } catch (e) {
       return false;
     }
@@ -34,12 +31,7 @@ export class BlogIsExistRule implements ValidatorConstraintInterface {
   }
 
   defaultMessage(args: ValidationArguments) {
-    return `User doesn't exist`;
+    return `Blog doesn't exist`;
   }
-}
-
-
-function Component() {
-  throw new Error('Function not implemented.');
 }
 
